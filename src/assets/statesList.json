@@ -1,0 +1,25 @@
+[
+    {
+        "Id": 1,    "Name": "London","countryid":"2"
+    },
+    {
+        "Id": 2,    "Name": "Knutsfurd","countryid":"2"
+    },
+    {
+        "Id": 3,    "Name": "Maharashtra","countryid":"1"
+    },
+    {
+        "Id": 4,    "Name": "Gujarat","countryid":"1"
+    }
+    ,
+    {
+        "Id": 5,    "Name": "Birmingham","countryid":"3"
+    },
+    {
+        "Id": 6,    "Name": "England","countryid":"3"
+    }
+    ,
+    {
+        "Id": 7,    "Name": "Paris","countryid":"4"
+    }
+]

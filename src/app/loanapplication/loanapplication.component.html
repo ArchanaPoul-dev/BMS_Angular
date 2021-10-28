@@ -1,0 +1,190 @@
+<div fxLayoutAlign="center center" fxFlexFill class="main-div">
+  <mat-card fxFlex=75>
+    <mat-toolbar color="primary">      
+      <h1 class="title-center" >Loan Application</h1>
+    </mat-toolbar>
+    <form (ngSubmit)="onloansubmit()" name="loanform" [formGroup]="loanform" fxLayoutAlign="stretch" fxLayout="column"
+      class="loan-form">
+
+      <h4 class="card-title" style=" height: 10% ;color: red;">* All fields are mandatory</h4>
+      <div class="card" style="width: 100%;">
+        <div class="card-body">
+          <div class="card-header">
+            <h3 class="card-title">Basic Details</h3>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-4">
+              <mat-form-field appearance="fill">
+                <mat-label>Loan Type</mat-label>
+                <mat-select required formControlName="loantype" (selectionChange)="onSelect($event)">
+                  <mat-option value="E">Educational</mat-option>
+                  <mat-option value="P">Personal/Home</mat-option>
+                </mat-select>
+                <mat-hint *ngIf="loanform.controls.loantype.errors && (loanform.controls.loantype.touched
+                    ||loanform.controls.loantype.dirty  )">Select Loan Type</mat-hint>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field>
+                <input formControlName="loanamt" type="number" min="1" matInput placeholder="Loan Amount">
+                <mat-hint *ngIf="loanform.controls.loanamt.errors && (loanform.controls.loanamt.touched
+                ||loanform.controls.loanamt.dirty  )">Enter valid loan amt</mat-hint>
+
+              </mat-form-field>
+
+            </div>
+            <div class="col-md-4">
+              <mat-form-field appearance="fill">
+                <mat-label>Loan Apply Date</mat-label>
+                <input matInput [matDatepicker]="loanapplydate" formControlName="loanapplydate">
+                <mat-datepicker-toggle matSuffix [for]="loanapplydate"></mat-datepicker-toggle>
+                <mat-datepicker #loanapplydate></mat-datepicker>
+
+                <mat-hint *ngIf="loanform.controls.loanapplydate.errors && (loanform.controls.loanapplydate.touched
+              ||loanform.controls.loanapplydate.dirty  )">Enter Valid Loan Apply Date</mat-hint>
+
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <mat-form-field appearance="fill">
+                <mat-label>Loan Issue Date</mat-label>
+                <input matInput [matDatepicker]="loanissuedate" formControlName="loanissuedate">
+                <mat-datepicker-toggle matSuffix [for]="loanissuedate"></mat-datepicker-toggle>
+                <mat-datepicker #loanissuedate></mat-datepicker>
+                <mat-hint *ngIf="loanform.controls.loanissuedate.errors && (loanform.controls.loanissuedate.touched
+          ||loanform.controls.loanissuedate.dirty  )">Enter Valid Loan Issue Date</mat-hint>
+
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field>
+                <input formControlName="roi" type="number" [readonly]="true" matInput placeholder="Rate Of Intrest">
+                <mat-hint *ngIf="loanform.controls.roi.errors && (loanform.controls.roi.touched
+                    ||loanform.controls.roi.dirty  )">Enter valid ROI</mat-hint>
+
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field appearance="fill">
+                <mat-label>Duration</mat-label>
+                <mat-select required formControlName="duration">
+                  <mat-option value="5">5</mat-option>
+                  <mat-option value="10">10</mat-option>
+                  <mat-option value="15">15</mat-option>
+                  <mat-option value="20">20</mat-option>
+                </mat-select>
+                <mat-hint *ngIf="loanform.controls.duration.errors && (loanform.controls.duration.touched
+                ||loanform.controls.duration.dirty  )">Select Duration</mat-hint>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row" *ngIf="showeduloandetails">
+            <div class="col-md-4">
+              <mat-form-field>
+                <input formControlName="coursefees" type="number" matInput placeholder="Course Fees">
+                <mat-hint *ngIf="loanform.controls.coursefees.errors && (loanform.controls.coursefees.touched
+                    ||loanform.controls.coursefees.dirty  )">Enter valid course fees</mat-hint>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field>
+                <input formControlName="course" matInput placeholder="Course">
+                <mat-hint *ngIf="loanform.controls.course.errors && (loanform.controls.course.touched
+                    ||loanform.controls.course.dirty  )">Enter valid loan amt</mat-hint>
+
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field>
+                <input formControlName="fathername" matInput placeholder="Fathers Name">
+                <mat-hint *ngIf="loanform.controls.fathername.errors && (loanform.controls.fathername.touched
+                    ||loanform.controls.fathername.dirty  )">Enter valid fathers name</mat-hint>
+
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row" *ngIf="showeduloandetails">
+            <div class="col-md-4">
+              <mat-form-field>
+                <input formControlName="fatherexp" type="number" matInput placeholder="Fathers Total Exp">
+                <mat-hint *ngIf="loanform.controls.fatherexp.errors && (loanform.controls.fatherexp.touched
+                    ||loanform.controls.fatherexp.dirty  )">Enter valid fathers exp</mat-hint>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field>
+                <input formControlName="fexpcurrentcmpny" type="number" matInput placeholder="Fathers Exp-Current Company">
+                <mat-hint *ngIf="loanform.controls.fexpcurrentcmpny.errors && (loanform.controls.fexpcurrentcmpny.touched
+                    ||loanform.controls.fexpcurrentcmpny.dirty  )">Enter valid fathers exp-current company</mat-hint>
+
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field>
+                <input formControlName="rationcardno" matInput placeholder="Ration Card No">
+                <mat-hint *ngIf="loanform.controls.rationcardno.errors && (loanform.controls.rationcardno.touched
+                    ||loanform.controls.rationcardno.dirty  )">Enter valid ration card no</mat-hint>
+
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <mat-form-field>
+                <input formControlName="annualincome" type="number" matInput placeholder="Annual Income">
+                <mat-hint *ngIf="loanform.controls.annualincome.errors && (loanform.controls.annualincome.touched
+                    ||loanform.controls.annualincome.dirty  )">Enter valid annual income</mat-hint>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4" *ngIf="showhomeloandetails">
+              <mat-form-field>
+                <input formControlName="companyname" matInput placeholder="Company Name">
+                <mat-hint *ngIf="loanform.controls.companyname.errors && (loanform.controls.companyname.touched
+                    ||loanform.controls.companyname.dirty  )">Enter valid company name</mat-hint>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4" *ngIf="showhomeloandetails">
+              <mat-form-field>
+                <input formControlName="designation" matInput placeholder="Designation">
+                <mat-hint *ngIf="loanform.controls.designation.errors && (loanform.controls.designation.touched
+                    ||loanform.controls.designation.dirty  )">Enter valid designation</mat-hint>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row" *ngIf="showhomeloandetails">
+            <div class="col-md-4">
+              <mat-form-field>
+                <input formControlName="totalexp" type="number" matInput placeholder="Total Experience">
+                <mat-hint *ngIf="loanform.controls.totalexp.errors && (loanform.controls.totalexp.touched
+                    ||loanform.controls.totalexp.dirty)">Enter valid total exp</mat-hint>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field>
+                <input formControlName="expwithcurcmpny" type="number"  matInput placeholder="Experience-Current Company">
+                <mat-hint *ngIf="loanform.controls.expwithcurcmpny.errors && (loanform.controls.expwithcurcmpny.touched
+                    ||loanform.controls.expwithcurcmpny.dirty)">Enter valid experience</mat-hint>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="action-wrapper">
+        <div class="actions">
+          <button mat-raised-button class="mr-3" color="secondary" (click)="onReset()">Reset</button>
+          <button mat-raised-button class="mr-3" [disabled]="!loanform.valid" type="submit"
+            color="primary">Submit</button>
+          
+        </div>        
+      </div>
+
+
+    </form>
+  </mat-card>
+</div>

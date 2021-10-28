@@ -1,0 +1,13 @@
+<mat-toolbar color="primary" *ngIf="loggedIn()">
+  <img src="\assets\loan.png" height="30" width="50" />
+  <a class="nav-item nav-link active">Home <span class="sr-only">(current)</span></a>
+  <a class="nav-item nav-link" (click)="onLoanRedirect()">Loan Application</a>
+  <a class="nav-item nav-link" (click)="onProfileRedirect()">Update Profile</a>
+  <span class="example-spacer"></span>
+  <div> Welcome {{uname}} !</div>
+  <a class="nav-item nav-link" (click)="onLogOut()"> Logout</a>
+</mat-toolbar>
+
+<div>
+  <router-outlet></router-outlet>
+</div>

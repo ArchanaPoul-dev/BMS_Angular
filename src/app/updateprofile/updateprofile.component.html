@@ -1,0 +1,273 @@
+<div fxLayoutAlign="center center" fxFlexFill class="main-div">
+    <mat-card fxFlex=85>
+      <mat-toolbar color="primary"><h1 class="title-center" >Update Profile</h1></mat-toolbar>
+      <!-- style="padding-top: 20px;" -->
+      <form name="registrationform" [formGroup]="registrationform" fxLayoutAlign="stretch" fxLayout="column" class="registration-form">
+  
+        <h4 class="card-title" style=" height: 10% ;color: red;">* All fields are mandatory</h4>
+        <div class="card" style="width: 100%;">
+          <div class="card-body">
+            <div class="card-header">
+              <h3 class="card-title">Basic Details</h3>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <mat-form-field>
+                  <input formControlName="name" matInput placeholder="Name">
+                  <mat-hint *ngIf="registrationform.controls.name.errors && (registrationform.controls.name.touched
+                     ||registrationform.controls.name.dirty)">
+                    Enter valid Name</mat-hint>
+                </mat-form-field>
+  
+              </div>
+              <div class="col-md-4">
+                <mat-form-field>
+                  <input formControlName="username" readOnly={{editmode}} matInput placeholder="UserName">
+                  <mat-hint *ngIf="registrationform.controls.username.errors && (registrationform.controls.username.touched
+                  ||registrationform.controls.username.dirty  )">
+                    Enter Valid UserName</mat-hint>
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field>
+                  <input formControlName="password" readOnly={{editmode}} matInput type=password placeholder="Password">
+                  <mat-hint *ngIf="registrationform.controls.password.errors && (registrationform.controls.password.touched      ||registrationform.controls.password.dirty  )">
+                  </mat-hint>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <mat-form-field appearance="fill">
+                  <mat-label>Gaurdian Type</mat-label>
+                  <mat-select required formControlName="gaurdiantype">
+                    <mat-option value="S">Self</mat-option>
+                    <mat-option value="F">Father</mat-option>
+                    <mat-option value="M">Mother</mat-option>
+                  </mat-select>
+                  <mat-hint *ngIf="registrationform.controls.gaurdiantype.errors && (registrationform.controls.gaurdiantype.touched
+              ||registrationform.controls.gaurdiantype.dirty  )">Select Gaurdian Type</mat-hint>
+  
+                </mat-form-field>
+  
+              </div>
+              <div class="col-md-4">
+                <mat-form-field>
+                  <input formControlName="gaurdianname" matInput placeholder="Gaurdian Name">
+                  <mat-hint *ngIf="registrationform.controls.gaurdianname.errors && (registrationform.controls.gaurdianname.touched
+             ||registrationform.controls.gaurdianname.dirty  )">Enter Valid Gaurdian Name</mat-hint>
+  
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field>
+                  <textarea formControlName="address" matInput placeholder="Address"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="card" style="width: 100%;">
+          <div class="card-body">
+            <div class="card-header">
+              <h3 class="card-title">Account Details</h3>
+            </div>
+            <br>
+  
+            <div class="row">
+              <div class="col-md-4">
+                <mat-form-field>
+                  <input formControlName="citizenship" matInput placeholder="Citizenship">
+                </mat-form-field>
+  
+              </div>
+              <div class="col-md-4">
+  
+                <mat-form-field appearance="fill">
+                  <mat-label>Country</mat-label>
+                  <mat-select formControlName="country" (selectionChange)="onSelect($event)">
+                    <mat-option *ngFor="let country of countries" [value]="country.Id">
+                      {{country.Name}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-hint *ngIf="registrationform.controls.country.errors && (registrationform.controls.country.touched
+              ||registrationform.controls.country.dirty  )">Select Country</mat-hint>
+  
+                </mat-form-field>
+  
+              </div>
+              <div class="col-md-4">
+                <mat-form-field appearance="fill">
+                  <mat-label>State</mat-label>
+                  <mat-select formControlName="state">
+                    <mat-option *ngFor="let state of states" [value]="state.Id">
+                      {{state.Name}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-hint *ngIf="registrationform.controls.state.errors && (registrationform.controls.state.touched
+              ||registrationform.controls.state.dirty  )">Select Country</mat-hint>
+  
+                </mat-form-field>
+  
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <mat-form-field>
+                  <input formControlName="emailaddress" matInput placeholder="Email Address">
+                </mat-form-field>
+  
+              </div>
+              <div class="col-md-4 radio-col">
+                <mat-radio-group formControlName="gender" aria-label="Select an option">
+                  <mat-radio-button checked="true" value="M">Male</mat-radio-button>
+                  <mat-radio-button value="F">Female</mat-radio-button>
+                </mat-radio-group>
+  
+              </div>
+              <div class="col-md-4">
+                <mat-form-field appearance="fill">
+                  <mat-label>Marital Status</mat-label>
+                  <mat-select required formControlName="maritalstatus">
+                    <mat-option value="M">Married</mat-option>
+                    <mat-option value="NM">Not-Married</mat-option>
+                    <mat-option value="D">Divorecee</mat-option>
+                  </mat-select>
+                  <mat-hint *ngIf="registrationform.controls.maritalstatus.errors && (registrationform.controls.maritalstatus.touched
+              ||registrationform.controls.maritalstatus.dirty  )">Select Marital status</mat-hint>
+  
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="card" style="width: 100%; margin-top: 20px;">
+          <div class="card-body">
+  
+            <div class="card-header">
+              <h3 class="card-title">Reference Details</h3>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-4">
+                <mat-form-field>
+                  <input formControlName="contactno" type="text" matInput placeholder="Contact No">
+                  <mat-hint *ngIf="registrationform.controls.contactno.errors && (registrationform.controls.contactno.touched
+                  ||registrationform.controls.contactno.dirty  )">Enter Valid contact no</mat-hint>
+  
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field appearance="fill">
+                  <mat-label>DOB</mat-label>
+                  <input matInput [matDatepicker]="dob" formControlName="dob">
+                  <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
+                  <mat-datepicker #dob></mat-datepicker>
+                  <mat-hint *ngIf="registrationform.controls.dob.errors && (registrationform.controls.dob.touched
+        ||registrationform.controls.dob.dirty  )">Enter Valid DOB</mat-hint>
+                </mat-form-field>
+  
+              </div>
+              <div class="col-md-4">
+                <mat-form-field appearance="fill">
+                  <mat-label>Registration Date</mat-label>
+                  <input matInput  [matDatepicker]="RegDate" formControlName="RegDate">
+                  <mat-datepicker-toggle  matSuffix [for]="RegDate"></mat-datepicker-toggle>
+              <mat-datepicker #RegDate></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <mat-form-field appearance="fill">
+                  <mat-label>Account Type</mat-label>
+                  <mat-select required formControlName="accounttype" (selectionChange)="onaccTypeChange($event)">
+                    <mat-option value="S">Saving</mat-option>
+                    <mat-option value="SL">Salary</mat-option>
+  
+                  </mat-select>
+                  <mat-hint *ngIf="registrationform.controls.accounttype.errors && (registrationform.controls.accounttype.touched
+              ||registrationform.controls.accounttype.dirty  )">Select Account Type</mat-hint>
+  
+                </mat-form-field>
+  
+              </div>
+              <div class="col-md-4">
+                <mat-form-field>
+                  <input formControlName="InitialDepAmt" type="number" min="0" [readonly]="true" matInput placeholder="Initial Deposit Amount">
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+  
+                <mat-form-field>
+                  <input formControlName="citizenstatus" [readonly]="true" matInput placeholder="Citizen Status">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <mat-form-field appearance="fill">
+                  <mat-label>ID Proof Type</mat-label>
+                  <mat-select required formControlName="idprooftype" (selectionChange)="onSelectIDprooftype($event)">
+                    <mat-option value="A">Adhar</mat-option>
+                    <mat-option value="P">PAN</mat-option>
+  
+                  </mat-select>
+                  <mat-hint *ngIf="registrationform.controls.idprooftype.errors && (registrationform.controls.idprooftype.touched
+              ||registrationform.controls.idprooftype.dirty  )">Select ID Proof Type</mat-hint>
+  
+                </mat-form-field>
+  
+              </div>
+              <div class="col-md-4">
+                <mat-form-field>
+                  <input formControlName="IDdocno" required matInput placeholder="ID Document No">
+  
+                  <mat-hint *ngIf="registrationform.controls.IDdocno.errors && (registrationform.controls.IDdocno.touched
+              ||registrationform.controls.IDdocno.dirty  )">Enter valid ID doc no</mat-hint>
+  
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <mat-form-field>
+                  <input formControlName="RefAccholderName" matInput placeholder="Ref Account Holder Name">
+                  <mat-hint *ngIf="registrationform.controls.RefAccholderName.errors && (registrationform.controls.RefAccholderName.touched
+        ||registrationform.controls.RefAccholderName.dirty  )">Enter Valid Ref Name</mat-hint>
+                </mat-form-field>
+  
+              </div>
+              <div class="col-md-4">
+  
+                <mat-form-field>
+                  <input formControlName="RefAccholderNo" matInput placeholder="Ref Account Holder acc no">
+                  <mat-hint *ngIf="registrationform.controls.RefAccholderNo.errors && (registrationform.controls.RefAccholderNo.touched
+           ||registrationform.controls.RefAccholderNo.dirty  )"></mat-hint>
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field>
+                  <textarea formControlName="RefAccholderAddress" matInput placeholder="Ref Account Holder Address"></textarea>
+                  <mat-hint *ngIf="registrationform.controls.RefAccholderAddress.errors && (registrationform.controls.RefAccholderAddress.touched
+           ||registrationform.controls.RefAccholderAddress.dirty  )"></mat-hint>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="action-wrapper">
+          <div class="actions">
+            <button mat-raised-button class="mr-3" color="secondary" (click)="onReset()">Reset</button>
+            <button mat-raised-button class="mr-3" [disabled]="!registrationform.valid" (click)="onUpdate()" color="primary">Update</button>
+            
+          </div>
+        </div>
+      </form>
+  
+    </mat-card>
+  </div>

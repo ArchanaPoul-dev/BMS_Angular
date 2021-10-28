@@ -1,0 +1,58 @@
+.main-div mat-card {
+  padding: 0px;
+  height: 300px;
+  max-width: 25% !important;
+  /* border-radius: 10px; */
+}
+
+.card-title {
+  height: 20px !important;
+}
+mat-toolbar
+ {
+  font-size: 16px !important;
+  height: 40px;
+  
+}
+
+.title-center {
+  flex: 1 1 auto;
+}
+
+.login-form {
+  padding: 20px;
+}
+
+input.ng-invalid.ng-touched {
+  border-color: red;
+}
+
+.main-div {
+  height: 100vh !important;
+  /* background-color: gray; */
+  background-image: url('/assets/bg.jpg');
+}
+
+.login-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.mat-form-field {
+  margin-bottom: 15px;
+}
+
+@media (max-width: 768px) {
+  .main-div mat-card {
+    max-width: 80% !important;
+  }
+}
+
+.login-btn {
+  position: absolute;
+  bottom: 50px;
+  width: 90%;
+}
